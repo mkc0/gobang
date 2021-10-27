@@ -1,5 +1,6 @@
 use crate::board::{Board, Chess};
 
+#[allow(dead_code)]
 pub fn display(board: &Board) {
     let n = board.size();
     let coord = board.last_coord();

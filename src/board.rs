@@ -1,3 +1,6 @@
+use std::fmt::Display;
+
+#[derive(PartialEq)]
 pub enum Chess {
     EMPTY,
     WHITE,
@@ -5,6 +8,16 @@ pub enum Chess {
     INVALID,
 }
 
+impl Display for Chess {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::result::Result<(), ::std::fmt::Error> {
+        match *self {
+            Chess::EMPTY => f.write_str("Empty"),
+            Chess::WHITE => f.write_str("White P2"),
+            Chess::BLACK => f.write_str("Black P1"),
+            Chess::INVALID => f.write_str("Invalid"),
+        }
+    }
+}
 #[allow(dead_code)]
 pub struct Board {
     n: usize,
@@ -108,5 +121,9 @@ impl Board {
 
     pub fn current_turn(self: &Self) -> Chess {
         Board::turn_to_chess(self.next_turn())
+    }
+
+    pub fn last_turn(self: &Self) -> Chess {
+        Board::turn_to_chess(self.turn)
     }
 }
